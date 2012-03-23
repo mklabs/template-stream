@@ -1,0 +1,21 @@
+{
+  "author": "mklabs",
+  "name": "template-stream",
+  "description": "Template Stream",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mklabs/template-stream.git"
+  },
+  "main": "lib/template-stream",
+  "engines": {
+    "node": "0.6.x"
+  },
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "devDependencies": {
+    "hogan.js": "*",
+    "handlebars": "*"
+  }
+}

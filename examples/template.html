@@ -1,0 +1,11 @@
+<p>Hello {{ name }} >> {{ version }}</p>
+
+<div class="entry">
+  <h1>{{ name }}</h1>
+  <h2>{{ description }}</h2>
+  <div class="body">
+    {{#each deps}}
+      <p>{{ this }}</p>
+    {{/each}}
+  </div>
+</div>
