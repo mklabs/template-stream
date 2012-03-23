@@ -7,10 +7,10 @@ handlebars / hogan.js supported for now, but others coming).
 
 heavily based on
 [@mikeal](https://github.com/mikeal)'s
-[`morestreams`](https://github.com/mikeal/morestreams),
+[morestreams](https://github.com/mikeal/morestreams),
 [@mmalecki](https://github.com/mmalecki)'s
-[`hashing-stream`](https://github.com/mmalecki/hashing-stream) and
-[`buffered`](https://github.com/mmalecki/buffered),
+[hashing-stream](https://github.com/mmalecki/hashing-stream) /
+[buffered](https://github.com/mmalecki/buffered), and
 [@visionmedia](https://github.com/visionmedia)'s
 [`consolidate.js`](https://github.com/visionmedia/consolidate.js),
 
@@ -18,28 +18,24 @@ heavily based on
 
 So that one can write something like this:
 
-```javascript
-var TemplateStream = require('template-stream').TemplateStream;
+    var TemplateStream = require('template-stream').TemplateStream;
 
-// Hello {{ name }} >> template.html
-fs.createReadStream('template.html')
-  .pipe(new TemplateStream('handlebars', { name: 'lalilulelo' }))
-  .on('end', function (body) {
-    console.log(body); // => Hello lalilulelo
-  });
-```
+    // Hello {{ name }} >> template.html
+    fs.createReadStream('template.html')
+      .pipe(new TemplateStream('handlebars', { name: 'lalilulelo' }))
+      .on('end', function (body) {
+        console.log(body); // => Hello lalilulelo
+      });
 
 `template-stream` is pipable, so the following is valid and should work in the
 way you'd expect.
 
-```javascript
-var TemplateStream = require('template-stream').TemplateStream;
+    var TemplateStream = require('template-stream').TemplateStream;
 
-// Hello {{ name }} >> template.html
-fs.createReadStream('template.html')
-  .pipe(new TemplateStream('handlebars', { name: 'lalilulelo' }))
-  .pipe(fs.wreateWriteStream('ouput.html'));
-```
+    // Hello {{ name }} >> template.html
+    fs.createReadStream('template.html')
+      .pipe(new TemplateStream('handlebars', { name: 'lalilulelo' }))
+      .pipe(fs.wreateWriteStream('ouput.html'));
 
 **Note**: On pipes to destinations, be warn that templates engine needs to
 compile a single raw string, thus only one relevant `data` event is emitted to
@@ -51,20 +47,20 @@ This is mainly sweet sugar api syntax rather than an attempt to be super optimiz
 
 ### Basic http server example
 
-```javascript
-var fs = require('fs'),
-  http = require('http'),
-  join = require('path').join,
-  TemplateStream = require('..').TemplateStream;
 
-http.createServer(function (req, res) {
-  fs.createReadStream(join(__dirname, 'template.html'))
-    .pipe(new TemplateStream('handlebars', { name: 'lalilulelo' }))
-    .pipe(res);
-}).listen(3000);
+    var fs = require('fs'),
+      http = require('http'),
+      join = require('path').join,
+      TemplateStream = require('..').TemplateStream;
 
-console.log('Fancy webserver listening on 3000');
-```
+    http.createServer(function (req, res) {
+      fs.createReadStream(join(__dirname, 'template.html'))
+        .pipe(new TemplateStream('handlebars', { name: 'lalilulelo' }))
+        .pipe(res);
+    }).listen(3000);
+
+    console.log('Fancy webserver listening on 3000');
+
 
 ## Install
 
